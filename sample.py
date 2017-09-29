@@ -70,7 +70,11 @@ if __name__ == "__main__":
         filename = os.path.join(indir, filename)
         filesize = os.path.getsize(filename)
 
-        img = Image.open(filename)
+        try:
+            img = Image.open(filename)
+        except:
+            continue
+
         format = img.format
         imgsize = img.size
 
