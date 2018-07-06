@@ -85,9 +85,12 @@ if __name__ == "__main__":
             exif_data = True if hasattr(img, '_getexif') else False
             print('{} size={} format={} width/height={} exif={}'.format(filename, filesize, format, imgsize, exif_data))
             # fix image
-            img = resize_image(img, 1024, 1024)
-            img.save(newfilename, img.format)
-            filesize = os.path.getsize(newfilename)
-            imgsize = img.size
-            exif_data = True if hasattr(img, '_getexif') else False
-            print('{} size={} format={} width/height={} exif={}'.format(newfilename, filesize, format, imgsize, exif_data))
+            try:
+                img = resize_image(img, 1024, 1024)
+                img.save(newfilename, img.format)
+                filesize = os.path.getsize(newfilename)
+                imgsize = img.size
+                exif_data = True if hasattr(img, '_getexif') else False
+                print('{} size={} format={} width/height={} exif={}'.format(newfilename, filesize, format, imgsize, exif_data))
+            except:
+                print('Exception caught, skip {} size={} format={} width/height={} exif={}'.format(filename, filesize, format, imgsize, exif_data))
